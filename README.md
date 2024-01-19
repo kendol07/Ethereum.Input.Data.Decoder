@@ -21,7 +21,7 @@ $inputData='0x1a1da0750000000000000000000000000000000000000000000000000000000000
 
 require 'decoder.php';
 $result=  DecodeDataInput($inputData);
-echo $result;
+print_r($result);
 
 
 Example 1:
