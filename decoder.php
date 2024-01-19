@@ -28,7 +28,7 @@ function DecodeDataInput($inputData) {
         } else if ($addressCount >= 1 && !isset($transaction['value'])) {
             // Tratar el segmento como un valor numérico
             $valueInWei = hexdec($segment);
-            $transaction['valor'] = $valueInWei;
+            $transaction['value'] = $valueInWei;
             
             //asignamos las direcciones o contratos y valores de las transacciones
             $results[$i] = count($transaction) < 3 ? ['address' => $transaction['contract'], 'value' => $transaction['value']] : $transaction;
