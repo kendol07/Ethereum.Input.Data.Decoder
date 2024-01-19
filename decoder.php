@@ -1,7 +1,7 @@
 <?php
 
 //funcion para decodificar los inputs
-function DecodificarDataInput($inputData) {
+function DecodeDataInput($inputData) {
     $validAddress = new \Binance\Utils();
     $dataWithoutFunctionSelector = substr($inputData, 10);
     $segments = str_split($dataWithoutFunctionSelector, 64);
@@ -20,18 +20,18 @@ function DecodificarDataInput($inputData) {
             $addressCount++;
             if ($addressCount == 1) {
                 // Primera dirección encontrada en el segmento
-                $transaction['contrato'] = $possibleAddress;
+                $transaction['contract'] = $possibleAddress;
             } else if ($addressCount == 2) {
                 // Segunda dirección encontrada, posible destinatario en transacciones de token
-                $transaction['direccion'] = $possibleAddress;
+                $transaction['address'] = $possibleAddress;
             }
-        } else if ($addressCount >= 1 && !isset($transaction['valor'])) {
+        } else if ($addressCount >= 1 && !isset($transaction['value'])) {
             // Tratar el segmento como un valor numérico
             $valueInWei = hexdec($segment);
             $transaction['valor'] = $valueInWei;
             
             //asignamos las direcciones o contratos y valores de las transacciones
-            $results[$i] = count($transaction) < 3 ? ['direccion' => $transaction['contrato'], 'valor' => $transaction['valor']] : $transaction;
+            $results[$i] = count($transaction) < 3 ? ['address' => $transaction['contract'], 'value' => $transaction['value']] : $transaction;
             $transaction = [];
             $addressCount = 0;
             $i++;
